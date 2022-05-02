@@ -1,15 +1,46 @@
-import { CLEAR_ALERT, DISPLAY_ALERT  } from "./actions";
-const reducer = ( state,action) =>{
-    if (action.type === DISPLAY_ALERT){
-        return{...state,showAlert:true,alertType:'danger',alertText:'Please provide all values '}
+import { CLEAR_ALERT, DISPLAY_ALERT, ADD_USER_BEGIN, ADD_USER_SUCCESS, ADD_USER_ERROR } from "./actions";
+const reducer = (state, action) => {
+    if (action.type === DISPLAY_ALERT) {
+        return {
+            ...state,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: 'Please provide all values '
+        }
     }
-    if (action.type === CLEAR_ALERT){
-        return{...state,
-        showAlert:false,
-        alertType:'',
-        alertText:'',    }
+    if (action.type === CLEAR_ALERT) {
+        return {
+            ...state,
+            showAlert: false,
+            alertType: '',
+            alertText: '',
+        }
+    }
+    if (action.type === ADD_USER_BEGIN) {
+        return {...state, isLoading:true  }
+    }
+    if (action.type === ADD_USER_SUCCESS) {
+        return {
+            ...state,
+            isLoading: false,
+            token: action.payload.token,
+            user: action.payload.user,
+            userLocation: action.payload.location,
+            showAlert: true,
+            alertType: 'success',
+            alertText: 'User Created! Redirecting...'
+        }
+    }
+    if (action.type === ADD_USER_ERROR) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: action.payload.msg,
+        }
     }
     throw new Error(`no such action : ${action.type}`)
 
 }
-export default reducer ;
+export default reducer;

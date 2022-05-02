@@ -1,3 +1,4 @@
+
 import express from 'express';
 const app = express();
 import dotenv from 'dotenv';
@@ -9,10 +10,13 @@ import labRouter from './routes/labRouters.js'
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 // import { Routes } from 'react-router-dom';
-app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send('welcome')
+app.use(express.json())
+app.get('/', (req, res) => { 
+    res.json({ msg: 'welcome' })
+})
+app.get('/api/v1', (req, res) => { 
+    res.json({ msg: 'API' })
 })
 
 app.use('/api/v1/auth', authRouter)
