@@ -10,7 +10,7 @@ const initialState = {
 }
 const AddUser = () => {
     const [values, setValues] = useState(initialState);
-    const { isLoading, showAlert, displayAlert,addUser } = useAppContext()
+    const { isLoading, showAlert, displayAlert, addUser } = useAppContext()
     //global state and useNavigate
     const handleChange = (e) => { setValues({ ...values, [e.target.name]: e.target.value }) }
     const onSubmit = (e) => {
