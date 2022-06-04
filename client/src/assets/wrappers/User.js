@@ -11,8 +11,7 @@ const Wrapper = styled.article`
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
     display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
+    place-items:center;
     h5 {
       letter-spacing: 0;
     }
@@ -28,15 +27,18 @@ const Wrapper = styled.article`
     font-weight: 700;
     text-transform: uppercase;
     color: var(--white);
-    margin-right: 2rem;
+
   }
   .info {
+    margin-top: 2rem;
+    display: grid;
+    place-items: center;
+    align-items: center;
     h5 {
       margin-bottom: 0.25rem;
     }
     p {
       margin: 0;
-      text-transform: capitalize;
       color: var(--grey-400);
       letter-spacing: var(--letterSpacing);
     }
@@ -80,13 +82,15 @@ const Wrapper = styled.article`
     height: 30px;
   }
   footer {
-    margin-top: 1rem;
+    display: grid;
+    place-items: center;
   }
   .edit-btn,
   .delete-btn {
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
     height: 30px;
+    width: 200px;
   }
   .edit-btn {
     color: var(--green-dark);

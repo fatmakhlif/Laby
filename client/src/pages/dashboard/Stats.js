@@ -1,8 +1,11 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useAppContext } from '../../context/appContext'
+import { StatsContainer, Loading, ChartsContainer } from '../../components'
 
-function Stats() {
+const Stats = () => {
+
   return (
-    <div>Stats page</div>
+    <div>stats</div>
   )
 }
 
