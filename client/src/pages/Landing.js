@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import {Logo} from '../components';
+import React, { Component } from 'react'; 
+import logo1 from '../assets/images/logo.svg';
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage.js'
+import { Link } from 'react-router-dom'
 class Landing extends Component {
     state = {  } 
     render() { 
         return (
         <Wrapper>
            <nav>
-            <Logo/>
+           <img src={logo1} alt='laby' className='logo'/>
          </nav> 
          <div  className='container page'>
              <div className='info'>
@@ -16,7 +17,9 @@ class Landing extends Component {
                  <p>
                      labdvegzfbufbgehbvfhdbvhfsdbvd
                  </p>
-                 <button className='btn btn-hero'>Login</button>
+                 <Link to='/login' className='btn btn-hero'>
+            Login
+          </Link>
              </div>
              
             <img src={main} alt="lab hunt" className='img main-img'/> 
