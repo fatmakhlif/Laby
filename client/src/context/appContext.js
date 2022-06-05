@@ -20,6 +20,8 @@ import { DISPLAY_ALERT,
     EDIT_RESEARCHER_SUCCESS,
     EDIT_RESEARCHER_ERROR,
     EDIT_RESEARCHER_BEGIN,
+    CLEAR_FILTERS,
+    CHANGE_PAGE,
 } from "./actions";
 import axios from 'axios';
 import reducer from './reducer';
@@ -57,6 +59,11 @@ const initialState = {
   statusOptions: ['actif', 'inactif'],
   status: 'actif',
   categoryy:'',
+  search: '',
+  searchStatus: 'all',
+  searchType: 'all',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 }
 
 const AppContext = React.createContext()
@@ -232,7 +239,13 @@ authFetch.interceptors.response.use(
       clearAlert()
     }
     const getResearchers = async () => {
-      let url = `/researchers`
+      // let url = `/researchers`
+
+      const {page, search, searchStatus, searchType, sort } = state
+      let url = `/researchers?page=${page}&status=${searchStatus}&category=${searchType}&sort=${sort}`
+      if (search) {
+        url = url + `&search=${search}`
+      }
     
       dispatch({ type: GET_RESEARCHERS_BEGIN })
       try {
@@ -295,9 +308,15 @@ authFetch.interceptors.response.use(
   }
   clearAlert()
     }
+    const clearFilters = () =>{
+      dispatch({ type: CLEAR_FILTERS })
+    }
+    const changePage = (page) => {
+      dispatch({ type: CHANGE_PAGE, payload: { page } })
+    }
     
 
-     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher}}>
+     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher,clearFilters,changePage}}>
          {children}
      </AppContext.Provider>)
  }

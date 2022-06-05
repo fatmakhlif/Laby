@@ -21,6 +21,8 @@ import { CLEAR_ALERT, DISPLAY_ALERT,
     EDIT_RESEARCHER_BEGIN,
     EDIT_RESEARCHER_SUCCESS,
     EDIT_RESEARCHER_ERROR,
+    CLEAR_FILTERS,
+    CHANGE_PAGE,
     } from "./actions";
 import { initialState } from './appContext'
 const reducer = ( state,action) =>{
@@ -124,7 +126,7 @@ const reducer = ( state,action) =>{
         }
       }
       if (action.type === HANDLE_CHANGE) {
-        return { ...state, [action.payload.name]: action.payload.value }
+        return { ...state,page: 1, [action.payload.name]: action.payload.value }
       }
       if (action.type === CLEAR_VALUES) {
         const initialState = {
@@ -216,6 +218,18 @@ const reducer = ( state,action) =>{
           alertType: 'danger',
           alertText: action.payload.msg,
         }
+      }
+      if (action.type === CLEAR_FILTERS) {
+        return {
+          ...state,
+          search: '',
+          searchStatus: 'all',
+          searchType: 'all',
+          sort: 'latest',
+        }
+      }
+      if (action.type === CHANGE_PAGE) {
+        return { ...state, page: action.payload.page }
       }
            
     throw new Error(`no such action : ${action.type}`)

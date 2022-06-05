@@ -3,12 +3,24 @@ import { useEffect } from 'react'
 import Loading from './Loading'
 import Researcher from './Researcher'
 import Wrapper from '../assets/wrappers/ResearchersContainer'
+import PageBtnContainer from './PageBtnContainer'
 
 const ResearchersContainer = () => {
-  const { getResearchers, researchers, isLoading, page, totalResearchers } = useAppContext()
+  const { getResearchers,
+     researchers,
+      isLoading,
+       page,
+        totalResearchers,
+        search,
+    searchStatus,
+    searchType,
+    sort,
+    numOfPages,
+
+       } = useAppContext()
   useEffect(() => {
     getResearchers()
-  }, [])
+  }, [page,search, searchStatus, searchType, sort])
 
   if (isLoading) {
     return <Loading center />
@@ -30,6 +42,7 @@ const ResearchersContainer = () => {
           return <Researcher key={researcher._id} {...researcher} />
         })}
       </div>
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   )
 }
