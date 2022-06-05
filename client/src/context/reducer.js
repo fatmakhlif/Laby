@@ -130,7 +130,8 @@ const reducer = ( state,action) =>{
         const initialState = {
           isEditing: false,
           editResearcherId: '',
-          category: 'Professor',
+          category: 'University teacher',
+          grade:'professor ',
           fullName: '',
           dateOfBirth:'',
           CIN :'',
@@ -178,12 +179,13 @@ const reducer = ( state,action) =>{
       }
       if (action.type === SET_EDIT_RESEARCHER) {
         const researcher = state.researchers.find((researcher) => researcher._id === action.payload.id)
-        const { _id, category, telephone, dateOfBirth, email,institution,fullName,CIN, status } = researcher
+        const { _id, category, telephone, dateOfBirth, email,institution,fullName,CIN, status,grade } = researcher
         return {
           ...state,
           isEditing: true,
           editResearcherId: _id,
           category,
+          grade,
            telephone,
             dateOfBirth,
              email,

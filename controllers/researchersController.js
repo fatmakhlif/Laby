@@ -1,11 +1,12 @@
 import Researcher from '../models/Researcher.js'
 import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, NotFoundError } from '../errors/index.js'
+import checkPermissions from '../utils/checkPermissions.js'
 
 const createResearcher = async (req, res) => {
-  const { category, fullName,telephone,dateOfBirth, institution,CIN,email } = req.body
+  const { category, fullName,telephone,dateOfBirth, institution,CIN,email,grade } = req.body
 
-  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth) {
+  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ||!grade) {
     throw new BadRequestError('Please Provide All Values')
   }
 
@@ -15,7 +16,7 @@ const createResearcher = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ researcher })
 }
 const getAllResearchers = async (req, res) => {
-  const researchers = await Researcher.find({ createdBy: req.user.userId })
+  const researchers = await Researcher.find()
 
   res
     .status(StatusCodes.OK)
@@ -30,9 +31,9 @@ const deleteChercheur = async (req,res)=>{res.send('deleteChercheur')}
 const updateResearcher = async (req,res)=>{
   const { id: researcherId } = req.params
 
-  const { category, fullName,telephone,dateOfBirth, institution,CIN,email } = req.body
+  const { category, fullName,telephone,dateOfBirth, institution,CIN,email,grade} = req.body
 
-  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth) {
+  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ||!grade) {
     throw new BadRequestError('Please Provide All Values')
   }
 

@@ -32,13 +32,15 @@ const initialState = {
   isEditing: false,
   editResearcherId: '',
   category:'',
+  grade:'',
   fullName:'',
   dateOfBirth:'',
   CIN:'',
   telephone:'',
   email:'',
   institution:'',
-  categoryOptions:['Professor', 'Associate Professor', 'Assistant Professor','Post-Doc','PhD Student','Ph.D'],
+  categoryOptions:["Master's student", 'PhD student', 'Doctor','University teacher'],
+  gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Master Technologist','Lecturer','Teacher'],
     isLoading: false ,
     showAlert: false ,
     alerttext : '',
@@ -54,6 +56,7 @@ const initialState = {
   page: 1,
   statusOptions: ['actif', 'inactif'],
   status: 'actif',
+  categoryy:'',
 }
 
 const AppContext = React.createContext()
@@ -200,7 +203,7 @@ authFetch.interceptors.response.use(
     const createResearcher = async () => {
       dispatch({ type: CREATE_RESEARCHER_BEGIN })
       try {
-        const { category, fullName,CIN,dateOfBirth,telephone, email, institution,status } = state
+        const { category, fullName,CIN,dateOfBirth,telephone, email, institution,status,grade } = state
     
         await authFetch.post('/researchers', {
           fullName,
@@ -208,6 +211,7 @@ authFetch.interceptors.response.use(
           dateOfBirth,
           telephone,
           category,
+          grade,
           email,
           institution,
           status,
@@ -262,6 +266,7 @@ authFetch.interceptors.response.use(
       dateOfBirth,
       telephone,
       category,
+      grade,
       email,
       institution,
        status } = state
@@ -272,6 +277,7 @@ authFetch.interceptors.response.use(
           dateOfBirth,
           telephone,
           category,
+          grade,
           email,
           institution,
           status,

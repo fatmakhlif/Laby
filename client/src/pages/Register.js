@@ -16,9 +16,9 @@ const  Register = () =>{
     const [values,setValues] = useState(initialState);
    
     const { user,isLoading,showAlert,displayAlert,registerUser,loginUser} = useAppContext()
-    const toggleMember = ()=>{
+    /*const toggleMember = ()=>{
         setValues({...values, isMember : !values.isMember})
-    }
+    } */
     //global state and useNavigate
     const handleChange =(e) => { setValues({...values,[e.target.name]: e.target.value})}
     const onSubmit = (e)=>{
@@ -48,7 +48,7 @@ const  Register = () =>{
              <Logo/>
              <h3>Login</h3>
              { showAlert && <Alert/> }
-             <FormRow type="text" name="name" value={values.name} handleChange={handleChange}  />
+             {/* <FormRow type="text" name="name" value={values.name} handleChange={handleChange}  /> */}
              <FormRow type="email" name="email" value={values.email} handleChange={handleChange}  />
              <FormRow type="password" name="password" value={values.password} handleChange={handleChange}  />
              <button type="submit" className='btn btn-block' disabled={isLoading}>submit</button>

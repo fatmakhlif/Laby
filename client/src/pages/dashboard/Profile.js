@@ -10,16 +10,17 @@ const Profile = () => {
   const [email, setEmail] = useState(user?.email)
   const [lastName, setLastName] = useState(user?.lastName)
   const [location, setLocation] = useState(user?.location)
+  const [password,setPassword] = useState(user?.password)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!name || !email || !lastName || !location) {
+    if (!name || !email || !lastName || !location || !password) {
       // test and remove temporary
       displayAlert()
       return
     }
 
-    updateUser({ name, email, lastName, location })
+    updateUser({ name, email, lastName, location , password })
   }
   return (
     <Wrapper>
@@ -51,9 +52,9 @@ const Profile = () => {
 
           <FormRow
             type='text'
-            name='location'
-            value={location}
-            handleChange={(e) => setLocation(e.target.value)}
+            name='password'
+            value={password}
+            handleChange={(e) => setPassword(e.target.value)}
           />
           <button className='btn btn-block' type='submit' disabled={isLoading}>
             {isLoading ? 'Please Wait...' : 'save changes'}

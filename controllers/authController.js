@@ -21,6 +21,7 @@ res.status(StatusCodes.CREATED).json({
         lastname : user.lastname,
         location : user.location,
         name:user.name,
+        password:user.password,
     }
 })
 
@@ -49,8 +50,8 @@ const login =  async (req,res)=>{
 }
 
 const updateUser = async (req, res) => {
-    const { email, name, lastName, location } = req.body
-    if (!email || !name || !lastName || !location) {
+    const { email, name, lastName, location,password} = req.body
+    if (!email || !name || !lastName || !location || !password) {
       throw new BadRequestError('Please provide all values')
     }
   
@@ -60,6 +61,7 @@ const updateUser = async (req, res) => {
     user.name = name
     user.lastName = lastName
     user.location = location
+    user.password = password
   
     await user.save()
   

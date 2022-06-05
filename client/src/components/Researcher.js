@@ -1,6 +1,11 @@
 import moment from 'moment'
 
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa'
+import { FaUniversity, FaBriefcase, FaCalendarAlt } from 'react-icons/fa'
+import { BsFillTelephoneFill } from 'react-icons/bs'
+
+import { MdOutlineGrade,MdPermIdentity,MdEmail } from 'react-icons/md'
+
+
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/appContext'
 import Wrapper from '../assets/wrappers/Researcher'
@@ -10,6 +15,7 @@ const Researcher = ({
   _id,
   fullName,
   category,
+  grade,
   CIN,
   institution,
   email,
@@ -26,18 +32,30 @@ const Researcher = ({
   return (
     <Wrapper>
       <header>
-        <div className='main-icon'>{CIN.charAt(0)}</div>
+        <div className='main-icon'>{fullName.charAt(0)}</div>
         <div className='info'>
           <h5>{fullName}</h5>
-          <p>{institution}</p>
+          {/* <p>{institution}</p> */}
         </div>
       </header>
       <div className='content'>
         {/* content center later */}
         <div className='content-center'>
-         <ResearcherInfo icon={<FaLocationArrow />} text={category} />
+         
+         <ResearcherInfo icon={<FaBriefcase />} text={category} />
          <ResearcherInfo icon={<FaCalendarAlt />} text={date} />
-         <ResearcherInfo icon={<FaBriefcase />} text={telephone} />
+         <ResearcherInfo icon={<BsFillTelephoneFill/>} text={telephone} />
+         <ResearcherInfo icon={<MdPermIdentity />} text={CIN} />
+         <ResearcherInfo icon={<FaUniversity />} text={institution} />
+         <ResearcherInfo icon={<MdOutlineGrade />} text={grade} />
+         <ResearcherInfo icon={<MdEmail />} text={email} />
+
+
+
+
+
+
+        
          <div className={`status ${status}`}>{status}</div> 
         </div>
         {/* footer center*/}

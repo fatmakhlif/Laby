@@ -7,12 +7,14 @@ const AddResearcher = () => {
     showAlert,
     displayAlert,
     category,
+    grade,
     email,
     fullName,
     CIN,
     dateOfBirth,
     telephone,
     institution,
+    gradeOptions,
     categoryOptions,
     handleChange,
     clearValues,
@@ -21,6 +23,7 @@ const AddResearcher = () => {
     status,
     statusOptions,
     editResearcher,
+    categoryy
 
 
   } = useAppContext()
@@ -28,7 +31,7 @@ const AddResearcher = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!category || !fullName || !institution ||!email || !CIN || !telephone  ) {
+    if (!category || !fullName || !institution ||!email || !CIN || !telephone ||!grade ) {
       displayAlert()
       return
    }
@@ -41,7 +44,7 @@ const AddResearcher = () => {
 
   const handleResearcherInput = (e) => {
     handleChange({ name: e.target.name, value: e.target.value })
-
+    
   }
 
   return (
@@ -101,6 +104,13 @@ const AddResearcher = () => {
       handleChange={handleResearcherInput}
       list={categoryOptions}
     />
+     {<FormRowSelect
+      labelText='grade'
+      name='grade'
+      value={grade}
+      handleChange={handleResearcherInput}
+      list={gradeOptions}
+    />}
     <FormRowSelect
       name='status'
       value={status}
