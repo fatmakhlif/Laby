@@ -27,7 +27,14 @@ const UserSchema =  new mongoose.Schema({
         minlength:6,
         select: false ,
       
-    },  
+    },
+    confirmpassword : {
+        type :String,
+        required:[true, 'please provide confirmpassword'],
+        minlength:6,
+        select: false ,
+      
+    },
     lastName : {
         type :String,
         maxlength:20,

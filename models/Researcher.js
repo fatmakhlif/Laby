@@ -58,7 +58,7 @@ const ResearcherSchema = new mongoose.Schema(
       },
       grade: {
         type: String,
-        enum:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor'],
+        enum:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor',''],
         default: "Technologist",
       },
     createdBy: {

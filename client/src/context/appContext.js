@@ -1,9 +1,9 @@
-import React,{useReducer,useContext,useEffect} from 'react';
+import React,{useReducer,useContext} from 'react';
 import { DISPLAY_ALERT,
     CLEAR_ALERT ,
     REGISTER_USER_BEGIN,REGISTER_USER_SUCCESS,REGISTER_USER_ERROR, LOGIN_USER_BEGIN,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_ERROR  , 
+    LOGIN_USER_ERROR, 
     TOGGLE_SIDEBAR,
     LOGOUT_USER,
     UPDATE_USER_BEGIN,
@@ -24,6 +24,7 @@ import { DISPLAY_ALERT,
     CHANGE_PAGE,
     SHOW_STATS_BEGIN,
     SHOW_STATS_SUCCESS,
+    DISPLAY_ALERT_PASSWORD,
 } from "./actions";
 import axios from 'axios';
 import reducer from './reducer';
@@ -36,7 +37,7 @@ const initialState = {
   isEditing: false,
   editResearcherId: '',
   category:'',
-  grade:'',
+  grade:' ',
   fullName:'',
   dateOfBirth:'',
   CIN:'',
@@ -44,7 +45,7 @@ const initialState = {
   email:'',
   institution:'',
   categoryOptions:["MasterStudent", 'PhDStudent', 'Doctor','UniversityTeacher'],
-  gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor'],
+  gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor',''],
     isLoading: false ,
     showAlert: false ,
     alerttext : '',
@@ -60,7 +61,7 @@ const initialState = {
   page: 1,
   statusOptions: ['actif', 'inactif'],
   status: 'actif',
-  categoryy:'',
+  
   search: '',
   searchStatus: 'all',
   searchType: 'all',
@@ -106,6 +107,9 @@ authFetch.interceptors.response.use(
 
      const displayAlert = ()=>{console.log('display alerte temchi');
          dispatch({type:DISPLAY_ALERT})
+    clearAlert()}
+    const displayAlertPassword = ()=>{console.log('display alerte temchi');
+         dispatch({type:DISPLAY_ALERT_PASSWORD})
     clearAlert()}
 
      const clearAlert =()=>{ 
@@ -338,7 +342,7 @@ authFetch.interceptors.response.use(
     }
     
 
-     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher,clearFilters,changePage,showStats}}>
+     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher,clearFilters,changePage,showStats,displayAlertPassword}}>
          {children}
      </AppContext.Provider>)
  }

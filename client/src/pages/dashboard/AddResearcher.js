@@ -23,7 +23,7 @@ const AddResearcher = () => {
     status,
     statusOptions,
     editResearcher,
-    categoryy
+  
 
 
   } = useAppContext()
@@ -31,7 +31,7 @@ const AddResearcher = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!category || !fullName || !institution ||!email || !CIN || !telephone ||!grade ) {
+    if (!category || !fullName || !institution ||!email || !CIN || !telephone  ) {
       displayAlert()
       return
    }

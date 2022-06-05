@@ -15,8 +15,8 @@ class Landing extends Component {
              <div className='info'>
                  <h1>Lab App</h1>
                  <p>
-                     labdvegzfbufbgehbvfhdbvhfsdbvd
-                 </p>
+                     Web App for laboratory mangement 
+                  </p>
                  <Link to='/login' className='btn btn-hero'>
             Login
           </Link>

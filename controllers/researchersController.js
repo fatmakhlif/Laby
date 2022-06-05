@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 const createResearcher = async (req, res) => {
   const { category, fullName,telephone,dateOfBirth, institution,CIN,email,grade } = req.body
 
-  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ||!grade) {
+  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ) {
     throw new BadRequestError('Please Provide All Values')
   }
 
@@ -70,7 +70,7 @@ const updateResearcher = async (req,res)=>{
 
   const { category, fullName,telephone,dateOfBirth, institution,CIN,email,grade} = req.body
 
-  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ||!grade) {
+  if (!category || !fullName || !institution || !email || !telephone ||!CIN || !dateOfBirth ) {
     throw new BadRequestError('Please Provide All Values')
   }
 

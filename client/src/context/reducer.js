@@ -25,12 +25,16 @@ import { CLEAR_ALERT, DISPLAY_ALERT,
     CHANGE_PAGE,
     SHOW_STATS_BEGIN,
     SHOW_STATS_SUCCESS,
+    DISPLAY_ALERT_PASSWORD,
     } from "./actions";
 import { initialState } from './appContext'
 const reducer = ( state,action) =>{
     if (action.type === DISPLAY_ALERT){
         return{...state,showAlert:true,alertType:'danger',alertText:'Please provide all values '}
     }
+    if (action.type === DISPLAY_ALERT_PASSWORD){
+      return{...state,showAlert:true,alertType:'danger',alertText:'Please verify password '}
+  }
     if (action.type === CLEAR_ALERT){
         return{...state,
         showAlert:false,
@@ -135,7 +139,7 @@ const reducer = ( state,action) =>{
           isEditing: false,
           editResearcherId: '',
           category: 'University teacher',
-          grade:'Professor',
+          grade:' ',
           fullName: '',
           dateOfBirth:'',
           CIN :'',
