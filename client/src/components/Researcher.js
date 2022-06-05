@@ -43,12 +43,12 @@ const Researcher = ({
         <div className='content-center'>
          
          <ResearcherInfo icon={<FaBriefcase />} text={category} />
-         <ResearcherInfo icon={<FaCalendarAlt />} text={date} />
+         {/* <ResearcherInfo icon={<FaCalendarAlt />} text={date} /> */}
          <ResearcherInfo icon={<BsFillTelephoneFill/>} text={telephone} />
          <ResearcherInfo icon={<MdPermIdentity />} text={CIN} />
          <ResearcherInfo icon={<FaUniversity />} text={institution} />
         
-            <ResearcherInfo icon={<MdOutlineGrade />} text={grade} />
+        <ResearcherInfo icon={<MdOutlineGrade />} text={grade}  />
          <ResearcherInfo icon={<MdEmail />} text={email} />
 
 

@@ -110,7 +110,7 @@ const AddResearcher = () => {
       value={grade}
       handleChange={handleResearcherInput}
       list={gradeOptions}
-    />}
+    /> }
     <FormRowSelect
       name='status'
       value={status}
