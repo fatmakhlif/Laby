@@ -49,7 +49,8 @@ const LabSchema = new mongoose.Schema({
         type:String,
     },
     university:{
-        type:String,
+        type: String,
+        required:[true,'please provide university '],
     },
     manager: {
         type:String,
@@ -57,6 +58,11 @@ const LabSchema = new mongoose.Schema({
     local: {
         type: String,
     },
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default:'active'
+    }
 })
 
 export default mongoose.model('Lab',LabSchema)

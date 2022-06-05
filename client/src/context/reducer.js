@@ -13,7 +13,16 @@ import {
     GET_USERS_BEGIN,
     GET_USERS_SUCCESS,
     HANDLE_CHANGE,
-    CLEAR_VALUES
+    CLEAR_VALUES,
+    CREATE_LAB_BEGIN,
+    CREATE_LAB_SUCCESS,
+    CREATE_LAB_ERROR,
+    GET_LABS_BEGIN,
+    GET_LABS_SUCCESS,
+    SET_EDIT_LAB,
+    EDIT_LAB_BEGIN,
+    EDIT_LAB_SUCCESS,
+    EDIT_LAB_ERROR
 } from "./actions";
 import { initialState } from './appContext'
 const reducer = (state, action) => {
@@ -122,6 +131,86 @@ const reducer = (state, action) => {
             labType: 'Research laboratory',
         }
         return { ...state, ...initialState }
+    }
+    if (action.type === CREATE_LAB_BEGIN) {
+        return { ...state, isLoading: true }
+    }
+    if (action.type === CREATE_LAB_SUCCESS) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'success',
+            alertText: 'New Laboratory Created!',
+        }
+    }
+    if (action.type === CREATE_LAB_ERROR) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: action.payload.msg,
+        }
+    }
+    if (action.type === GET_LABS_BEGIN) {
+        return { ...state, isLoading: true, showAlert: false }
+    }
+    if (action.type === GET_LABS_SUCCESS) {
+        return {
+            ...state,
+            isLoading: false,
+            labs: action.payload.labs,
+            totalLabs: action.payload.totalLabs,
+        }
+    }
+    if (action.type === SET_EDIT_LAB) {
+        const lab = state.labs.find((lab) => lab._id === action.payload.id)
+        const { _id, name,
+            acronym,
+            phone,
+            email,
+            specialty,
+            domain,
+            researchAreas,
+            labType } = lab
+        return {
+            ...state,
+            isEditing: true,
+            editLabId: _id,
+            name,
+            acronym,
+            phone,
+            email,
+            specialty,
+            domain,
+            researchAreas,
+            labType
+        }
+    }
+    if (action.type === EDIT_LAB_BEGIN) {
+
+        return { ...state, isLoading: true }
+
+    }
+    if (action.type === EDIT_LAB_SUCCESS) {
+
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'success',
+            alertText: 'Lab Updated!',
+        }
+    }
+    if (action.type === EDIT_LAB_ERROR) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: action.payload.msg,
+        }
     }
     throw new Error(`no such action : ${action.type}`)
 

@@ -8,25 +8,35 @@ const AddLab = () => {
     isEditing,
     showAlert,
     displayAlert,
-    labName,
+    name,
     acronym,
     phone,
     email,
     specialty,
     domain,
     researchAreas,
+    university,
     labTypeOptions,
     labType,
+    statusOptions,
+    status,
     handleChange,
     clearValues,
+    createLab,
+    editLab
   } = useAppContext()
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!labName || !acronym || !phone || !email || !specialty || !domain || !researchAreas) {
+    if (!name || !acronym || !phone || !email || !specialty || !domain || !researchAreas) {
       displayAlert()
       return
     }
-    console.log('create lab');
+    if (isEditing) {
+      editLab()
+      return
+    }
+
+    createLab()
   }
   const handleLabInput = (e) => {
     handleChange({ name: e.target.name, value: e.target.value })
@@ -42,8 +52,8 @@ const AddLab = () => {
           <FormRow
             labelText="laboratory name"
             type='text'
-            name='labName'
-            value={labName}
+            name='name'
+            value={name}
             handleChange={handleLabInput}
           />
           <FormRow
@@ -66,6 +76,12 @@ const AddLab = () => {
           />
           <FormRow
             type='text'
+            name='university'
+            value={university}
+            handleChange={handleLabInput}
+          />
+          <FormRow
+            type='text'
             name='specialty'
             value={specialty}
             handleChange={handleLabInput}
@@ -78,7 +94,7 @@ const AddLab = () => {
           />
           <FormRow
             type='text'
-            name='research areas'
+            name='researchAreas'
             value={researchAreas}
             handleChange={handleLabInput}
           />
@@ -91,6 +107,15 @@ const AddLab = () => {
               list={labTypeOptions}
             />
           </div>
+          <div className='form-row'>
+            <FormRowSelect
+              labelText='Status'
+              name='status'
+              value={status}
+              handleChange={handleLabInput}
+              list={statusOptions}
+            />
+          </div>
           <div className='btn-container'>
             <button
               className='btn btn-block submit-btn'
@@ -99,9 +124,6 @@ const AddLab = () => {
             >
               submit
             </button>
-          </div>
-          <div className='btn-container'>
-            {/* submit button */}
             <button
               className='btn btn-block clear-btn'
               onClick={(e) => {

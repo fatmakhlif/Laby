@@ -10,10 +10,17 @@ import {
     LOGIN_USER_ERROR,
     TOGGLE_SIDEBAR,
     LOGOUT_USER,
-    GET_USERS_BEGIN,
-    GET_USERS_SUCCESS,
     HANDLE_CHANGE,
     CLEAR_VALUES,
+    CREATE_LAB_BEGIN,
+    CREATE_LAB_SUCCESS,
+    CREATE_LAB_ERROR,
+    GET_LABS_BEGIN,
+    GET_LABS_SUCCESS,
+    SET_EDIT_LAB,
+    EDIT_LAB_BEGIN,
+    EDIT_LAB_SUCCESS,
+    EDIT_LAB_ERROR
 } from "./actions";
 import axios from 'axios';
 import reducer from './reducer';
@@ -38,9 +45,19 @@ const initialState = {
     email: '',
     specialty: '',
     domain: '',
+    university: '',
     researchAreas: '',
     labTypeOptions: ['Research Unit', 'Research laboratory'],
-    labType: 'Research laboratory'
+    labType: 'Research laboratory',
+    statusOptions: ['active', 'inactive'],
+    status: 'active',
+    search: '',
+    shearchStatus: 'all',
+    searchType: 'all',
+    sort: 'a-z',
+    sortOptions: ['a-z', 'z-a'],
+    labs: [],
+    totalLabs: 0
 }
 
 const AppContext = React.createContext()
@@ -53,6 +70,7 @@ const AppProvider = ({ children }) => {
             Authorization: `Bearer ${state.token}`,
         },
     })
+
     authFetch.interceptors.request.use(
         (config) => {
             config.headers.common['Authorization'] = `Bearer ${state.token}`
@@ -144,24 +162,6 @@ const AppProvider = ({ children }) => {
         }
         clearAlert()
     }
-    const getUsers = async () => {
-        dispatch({ type: GET_USERS_BEGIN })
-        try {
-            const { data } = await authFetch.get('/auth')
-            const { users, totalUsers } = data
-            dispatch({
-                type: GET_USERS_SUCCESS,
-                payload: {
-                    users,
-                    totalUsers,
-                },
-            })
-        } catch (error) {
-            console.log(error.response)
-            logoutUser()
-        }
-        clearAlert()
-    }
     const handleChange = ({ name, value }) => {
         dispatch({
             type: HANDLE_CHANGE,
@@ -171,11 +171,83 @@ const AppProvider = ({ children }) => {
     const clearValues = () => {
         dispatch({ type: CLEAR_VALUES })
     }
-    useEffect(() => {
-        getUsers()
-    }, [])
+    const createLab = async () => {
+        dispatch({ type: CREATE_LAB_BEGIN })
+        try {
+            const { name, acronym, phone, email, specialty, domain, researchAreas, type, status, university } = state
+
+            await authFetch.post('/lab', {
+                name,
+                acronym,
+                phone,
+                email,
+                specialty,
+                domain,
+                researchAreas,
+                type,
+                status,
+                university
+            })
+            dispatch({
+                type: CREATE_LAB_SUCCESS,
+            })
+            // call function instead clearValues()
+            dispatch({ type: CLEAR_VALUES })
+        } catch (error) {
+            if (error.response.status === 401) return
+            dispatch({
+                type: CREATE_LAB_ERROR,
+                payload: { msg: error.response.data.msg },
+            })
+        }
+        clearAlert()
+    }
+    const getLabs = async () => {
+        let url = '/lab'
+        dispatch({ type: GET_LABS_BEGIN })
+        try {
+            const { data } = await authFetch(url)
+            const { labs, totalLabs } = data
+            dispatch({
+                type: GET_LABS_SUCCESS,
+                payload: {
+                    labs,
+                    totalLabs,
+                },
+            })
+        } catch (error) {
+            console.log(error.response)
+            logoutUser()
+        }
+        clearAlert()
+    }
+    const setEditLab = (id) => {
+        dispatch({ type: SET_EDIT_LAB, payload: { id } })
+    }
+    const editLab = async () => {
+        dispatch({ type: EDIT_LAB_BEGIN })
+        try {
+            const { name, acronym, phone, email, specialty, domain, researchAreas, type, status } = state
+            await authFetch.patch(`/lab/${state.editLabId}`, {
+                name, acronym, phone, email, specialty, domain, researchAreas, type, status
+            })
+            dispatch({
+                type: EDIT_LAB_SUCCESS,
+            })
+            dispatch({ type: CLEAR_VALUES })
+        } catch (error) {
+            if (error.response.status === 401) return
+            dispatch({
+                type: EDIT_LAB_ERROR,
+                payload: { msg: error.response.data.msg },
+            })
+        }
+        clearAlert()
+    }
+   
+
     return (
-        <AppContext.Provider value={{ ...state, displayAlert, loginUser, toggleSidebar, logoutUser, updateUser, getUsers, handleChange, clearValues }}>
+        <AppContext.Provider value={{ ...state, displayAlert, loginUser, toggleSidebar, logoutUser, updateUser, handleChange, clearValues, createLab, getLabs, setEditLab, editLab }}>
             {children}
         </AppContext.Provider>
     )

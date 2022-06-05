@@ -1,8 +1,11 @@
 import React from 'react'
-
+import { LabsContainer} from '../../components'
 const AllLabs = () => {
   return (
-    <div>allLabs</div>
+    
+    <div>
+      <LabsContainer />
+    </div>
   )
 }
 

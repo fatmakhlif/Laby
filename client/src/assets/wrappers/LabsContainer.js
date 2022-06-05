@@ -8,36 +8,30 @@ const Wrapper = styled.section`
   & > h5 {
     font-weight: 700;
   }
-  .users {
+  .labs {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
-  @media (min-width: 480px){
-    .users {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-  }
+
   @media (min-width: 720px){
-    .users {
+    .labs {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr ;
+      grid-template-columns: 1fr;
       gap: 1rem;
     }
   }
   @media (min-width: 1248px){
-    .users {
+    .labs {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr  ;
       gap: 1rem;
     }
   }
   @media (min-width: 1578px) {
-    .users {
+    .labs {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr  ;
       gap: 1rem;
     }
   }

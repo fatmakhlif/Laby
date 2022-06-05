@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, Error, Login } from '../src/pages';
-import { AddLab, AllLabs, Profile, SharedLayout,Stats } from './pages/dashboard'
+import { AddLab, AllLabs, Profile, SharedLayout } from './pages/dashboard'
 
 
 function App() {
@@ -14,9 +14,8 @@ function App() {
             <SharedLayout />
           </ProtectedRoute>
         } >
-          <Route index element={<Stats />}></Route>
+          <Route index element={<AllLabs />}></Route>
           <Route path="add-lab" element={<AddLab/>} ></Route>
-          <Route path="all-labs" element={<AllLabs/>} ></Route>
           <Route path="profile" element={<Profile />}></Route>
         </Route>
         <Route path='/login' element={<Login />} />
