@@ -135,7 +135,7 @@ const reducer = ( state,action) =>{
           isEditing: false,
           editResearcherId: '',
           category: 'University teacher',
-          grade:'professor ',
+          grade:'Professor',
           fullName: '',
           dateOfBirth:'',
           CIN :'',

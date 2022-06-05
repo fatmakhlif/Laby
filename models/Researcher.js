@@ -7,7 +7,7 @@ const ResearcherSchema = new mongoose.Schema(
         type :String,
         required:[true, 'please provide fullName'],
         minlength:3,
-        maxlength:20,
+        maxlength:25,
         trim:true
     },
     dateOfBirth: {
@@ -58,7 +58,7 @@ const ResearcherSchema = new mongoose.Schema(
       },
       grade: {
         type: String,
-        enum:['Technologist', 'Assistant ', 'Assistant professor','Master Technologist','Lecturer','professor'],
+        enum:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor'],
         default: "Technologist",
       },
     createdBy: {

@@ -44,7 +44,7 @@ const initialState = {
   email:'',
   institution:'',
   categoryOptions:["MasterStudent", 'PhDStudent', 'Doctor','UniversityTeacher'],
-  gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Master Technologist','Lecturer','Teacher'],
+  gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Associate Professor','Master Technologist','Lecturer','Professor'],
     isLoading: false ,
     showAlert: false ,
     alerttext : '',
