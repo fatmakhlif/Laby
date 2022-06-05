@@ -22,6 +22,8 @@ import { DISPLAY_ALERT,
     EDIT_RESEARCHER_BEGIN,
     CLEAR_FILTERS,
     CHANGE_PAGE,
+    SHOW_STATS_BEGIN,
+    SHOW_STATS_SUCCESS,
 } from "./actions";
 import axios from 'axios';
 import reducer from './reducer';
@@ -41,7 +43,7 @@ const initialState = {
   telephone:'',
   email:'',
   institution:'',
-  categoryOptions:["Master's student", 'PhD student', 'Doctor','University teacher'],
+  categoryOptions:["MasterStudent", 'PhDStudent', 'Doctor','UniversityTeacher'],
   gradeOptions:['Technologist', 'Assistant ', 'Assistant professor','Master Technologist','Lecturer','Teacher'],
     isLoading: false ,
     showAlert: false ,
@@ -64,6 +66,8 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+  stats: {},
+  monthlyApplications: [],
 }
 
 const AppContext = React.createContext()
@@ -314,9 +318,27 @@ authFetch.interceptors.response.use(
     const changePage = (page) => {
       dispatch({ type: CHANGE_PAGE, payload: { page } })
     }
+    const showStats = async () => {
+      dispatch({ type: SHOW_STATS_BEGIN })
+      try {
+        const { data } = await authFetch('/researchers/stats')
+        dispatch({
+          type: SHOW_STATS_SUCCESS,
+          payload: {
+            stats: data.defaultStats,
+            monthlyApplications: data.monthlyApplications,
+          },
+        })
+      } catch (error) {
+  console.log(error.response)
+        // logoutUser()
+      }
+  
+  clearAlert()
+    }
     
 
-     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher,clearFilters,changePage}}>
+     return(<AppContext.Provider value={{...state,displayAlert,registerUser,loginUser,toggleSidebar,logoutUser,updateUser,handleChange,clearValues,createResearcher,getResearchers,setEditResearcher,editResearcher,clearFilters,changePage,showStats}}>
          {children}
      </AppContext.Provider>)
  }

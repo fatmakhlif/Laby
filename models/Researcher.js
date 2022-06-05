@@ -53,13 +53,13 @@ const ResearcherSchema = new mongoose.Schema(
     },
     category: {
         type: String,
-        enum: ["Master's student", 'PhD student', 'Doctor','University teacher'],
-        default: "Master's student",
+        enum: ["MasterStudent", 'PhDStudent', 'Doctor','UniversityTeacher'],
+        default: "MasterStudent",
       },
       grade: {
         type: String,
         enum:['Technologist', 'Assistant ', 'Assistant professor','Master Technologist','Lecturer','professor'],
-        default: "Master's student",
+        default: "Technologist",
       },
     createdBy: {
      type: mongoose.Types.ObjectId,

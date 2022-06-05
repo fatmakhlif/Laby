@@ -2,7 +2,7 @@ import Researcher from '../models/Researcher.js'
 import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, NotFoundError } from '../errors/index.js'
 import checkPermissions from '../utils/checkPermissions.js'
-
+import mongoose from 'mongoose'
 const createResearcher = async (req, res) => {
   const { category, fullName,telephone,dateOfBirth, institution,CIN,email,grade } = req.body
 
@@ -95,7 +95,26 @@ const updateResearcher = async (req,res)=>{
 
 }
 
-const showStats = async (req,res)=>{res.send(' showStats')}
+const showStats = async (req,res)=>{
+  let stats = await Researcher.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$category', count: { $sum: 1 } } },
+  ])
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr
+    acc[title] = count
+    return acc
+  }, {})
+
+  const defaultStats = {
+    MasterStudent: stats.MasterStudent || 0,
+    PhDStudent: stats.PhDStudent || 0,
+    Doctor: stats.Doctor || 0,
+    UniversityTeacher : stats.UniversityTeacher || 0,
+  }
+  let monthlyApplications = []
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
+}
 
 
 export {createResearcher ,getAllResearchers, deleteChercheur  , updateResearcher , showStats }

@@ -7,6 +7,9 @@ import BigSidebar from './BigSidebar';
 import FormRowSelect from './FormRowSelect';
 import SearchContainer from './SearchContainer';
 import ResearchersContainer from './ResearchersContainer';
+import StatsContainer from './StatsContainer'
+import Loading from './Loading'
+
 export {
     SmallSidebar,
     BigSidebar,
@@ -16,5 +19,7 @@ export {
     Alert,
     FormRowSelect,
     SearchContainer,
-    ResearchersContainer
+    ResearchersContainer,
+    StatsContainer,
+    Loading,
 }; 

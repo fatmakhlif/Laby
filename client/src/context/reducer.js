@@ -23,6 +23,8 @@ import { CLEAR_ALERT, DISPLAY_ALERT,
     EDIT_RESEARCHER_ERROR,
     CLEAR_FILTERS,
     CHANGE_PAGE,
+    SHOW_STATS_BEGIN,
+    SHOW_STATS_SUCCESS,
     } from "./actions";
 import { initialState } from './appContext'
 const reducer = ( state,action) =>{
@@ -230,6 +232,17 @@ const reducer = ( state,action) =>{
       }
       if (action.type === CHANGE_PAGE) {
         return { ...state, page: action.payload.page }
+      }
+      if (action.type === SHOW_STATS_BEGIN) {
+        return { ...state, isLoading: true, showAlert: false }
+      }
+      if (action.type === SHOW_STATS_SUCCESS) {
+        return {
+          ...state,
+          isLoading: false,
+          stats: action.payload.stats,
+          monthlyApplications: action.payload.monthlyApplications,
+        }
       }
            
     throw new Error(`no such action : ${action.type}`)
