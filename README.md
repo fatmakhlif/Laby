@@ -17,10 +17,10 @@ npm run install-dependencies
 npm start
 
 ```
-# ![Project](https://github.com/fatmakhlif/Laby-MERN/blob/master/1.jpg)
-# ![Project](https://github.com/fatmakhlif/Laby-MERN/master/2.jpg)
-# ![Project](https://github.com/fatmakhlif/Laby-MERN/3.jpg)
-# ![Project](https://github.com/fatmakhlif/Laby-MERN/4.jpg)
+# ![Project](https://github.com/fatmakhlif/Laby-MERN/blob/main/1.jpg)
+# ![Project](https://github.com/fatmakhlif/Laby-MERN/blob/main/2.jpg)
+# ![Project](https://github.com/fatmakhlif/Laby-MERN/blob/main/3.jpg)
+# ![Project](https://github.com/fatmakhlif/Laby-MERN/blob/main/4.jpg)
 
 
 
