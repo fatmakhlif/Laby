@@ -14,3 +14,6 @@ npm run install-dependencies
 ```sh
 
 npm start
+
+# ![Project](https://github.com/fatmakhlif/Laby-MERN/1.jpg)
+
