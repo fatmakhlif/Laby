@@ -1,6 +1,11 @@
 #### Run The App Locally
 
 ```sh
+Application web de gestion de laboratoire de recherche
+  Technologies: Node Js ,Express Js, React Js ,MongoDB
+```
+
+```sh
 npm run install-dependencies
 ```
 
